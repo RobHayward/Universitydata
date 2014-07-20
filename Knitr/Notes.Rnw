@@ -29,5 +29,52 @@
 <<loadata, message=FALSE, echo=FALSE>>=
 da <- read.csv("../Data/FI1.csv", stringsAsFactors = FALSE)
 @
-The total number of students was \Sexpr{length(da$Mark)}.  
+The total number of students was \Sexpr{length(da$Mark)}.  The outcomes at the summer board are in Table \ref{tabref:out}.  
+
+<<outcometable, message=FALSE, echo=FALSE, results='asis'>>=
+require(xtable)
+da$Outcome <- factor(da$Outcome)
+# da$Outcomeprop <- as.numeric(levels(da$Outcome))[da$Outcome]
+nicetable <- xtable(table(da$Outcome, dnn = "Number of Students"), caption = "Outcome of Level 4 BSc. Finance and Investsment Students", label = "tabref:out")
+nicetable
+@
+The figures show that \Sexpr{table(da$Outcome)[1]/length(da$Outcome)*100} percent of the students failed and were asked to withdraw;  \Sexpr{table(da$Outcome)[2]/length(da$Outcome)*100} percent passed at the first attempt; \Sexpr{table(da$Outcome)[3]/length(da$Outcome)*100} were referred and \Sexpr{table(da$Outcome)[4]/length(da$Outcome)*100} withdrew before taking exams.  
+
+There are four issues to consider in detail: the first is the proportion of student who do not complete the first year; the second is the performance of students taken onto the course through clearing; the third is the relationship between student entry grades and the level four performance; the final issue is that of the perforfmance of overseas students. 
+
+\subsection*{Proportion of students completing level 4}
+
+Though the University counts these fail-withdrals and withdral as the same, it is clear from an investigation of the student files that these are two distinct categories.  The second group include two students who switched to another course and it is clear that these students did not find the course to their taste 
+
+For example, Eleanor Alabaster withdrew for``family and personal reasons'';  Erikas Gringaliunas withdrew because for financial reasons, he was an overseas student from Lithuania, had no financia support and found it too expensive in Brighton; Laura Battle withdrew because she found it impossible to keep up with the mathematical elemnts of Economics and had not settled in Brighton; Jack Bridges transfered out to Sport and Exercise Science; Craig O'Neill withdrew (Not sure look at notes); Samuel Peka transfered to Computer Science. 
+
+I spoke to Erikas and Laura before they left.  
+
+\subsection*{Performance of clearing students}
+There were \Sexpr{sum(da$Clear == 1)} students taken  onto the course through clearing.  
+
+<<outcometable2, message=FALSE, echo=FALSE, results='asis'>>=
+require(xtable)
+da$Outcome <- factor(da$Outcome)
+daclear <- subset(da, da$Clear == 1)
+# da$Outcomeprop <- as.numeric(levels(da$Outcome))[da$Outcome]
+nicetable2 <- xtable(table(daClear$Outcome, dnn = "Number of Students"), caption = "Outcome of Level 4 BSc. Finance and Investsment Students joined throgh clearing", label = "tabref:out")
+nicetable2
+@
+
+<<boxplot1, echo=FALSE, fig.height=5, fig.width=4>>=
+daclear <- subset(da, da$Clear == 1)
+boxplot(da$Mark, daclear$Mark, names = c("Full Group", "Clearing"), main = "Grade Distribution of Student Grades")
+@
+
+<<boxplot2, echo=FALSE, fig.height=5, fig.width=4>>=
+daover <- subset(da, da$Fee.status == "O")
+boxplot(da$Mark, daover$Mark, names = c("Full Group", "Overseas"), main = "Grade Distribution of Student Grades")
+@
+
+<<reg, echo=FALSE, results='asis'>>=
+da$Alevel <- factor(da$Alevel, labels = c("ABB or close", "Lower A-Level", "BTEC and other"))
+nicetable3 <- xtable(lm(da$Mark ~ da$Alevel -1), label = "Eqref:1", caption = "Level 4 grade for A-level category", digits = 2)
+nicetable3
+@
 \end{document}

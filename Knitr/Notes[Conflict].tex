@@ -77,10 +77,10 @@
 %erehrere
 %\end{abstract}
 
-The total number of students was 34.  The outcomes at the summer board are in Table \ref{tabref:out}.  
+The total number of students was 34.  The outcomes recorded by the summer Exam Board are in Table \ref{tabref:out}.  
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Jul 20 19:46:27 2014
+% Sun Jul 20 18:47:14 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -97,9 +97,9 @@ FWD &   3 \\
 \label{tabref:out}
 \end{table}
 
-The figures show that 8.8235 percent of the students failed and were asked to withdraw;  55.8824 percent passed at the first attempt; 17.6471 were referred and 17.6471 withdrew before taking exams.  
+The figures show that 8.82 percent of the students failed and were asked to withdraw;  55.88 percent passed at the first attempt; 17.65 were referred and 17.65 withdrew before taking exams.  
 
-There are four issues to consider in detail: the first is the proportion of student who do not complete the first year; the second is the performance of students taken onto the course through clearing; the third is the relationship between student entry grades and the level four performance; the final issue is that of the perforfmance of overseas students. 
+There are four issues to consider in detail: the first is the proportion of students who do not complete the first year; the second is the performance of students taken onto the course through clearing; the third is the relationship between student entry grades and the level four performance; the final issue is that of the perforfmance of overseas students. 
 
 \subsection*{Proportion of students completing level 4}
 
@@ -110,29 +110,52 @@ For example, Eleanor Alabaster withdrew for``family and personal reasons'';  Eri
 I spoke to Erikas and Laura before they left.  
 
 \subsection*{Performance of clearing students}
-There were 6 students taken  onto the course through clearing.  
-
-\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'daClear' not found}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: object 'nicetable2' not found}}\end{kframe}
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/boxplot1} 
-
-\end{knitrout}
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/boxplot2} 
-
-\end{knitrout}
+There were 6 students taken  onto the course through clearing. It is clear from Table \ref{tabref:out2} that these students performed relatively well.   
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Jul 20 19:46:27 2014
+% Sun Jul 20 18:47:14 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+ & Number of Students \\ 
+  \hline
+FWD &   0 \\ 
+  Pass &   4 \\ 
+  Refer &   2 \\ 
+  Withdrawal &   0 \\ 
+   \hline
+\end{tabular}
+\caption{Outcome of Level 4 BSc. Finance and Investsment Students joined throgh clearing} 
+\label{tabref:out2}
+\end{table}
+
+Using a Boxplot to compare the grade performance of all students relative to those that came through clearing (Figure \ref{fig:boxplot1}) it is evident that the weakest performance are not coming from those that were recruited through clearing.  The box plot shows the distribution of grades; the solid black line is the median grade for all students and for clearing students respectively; the box gives the interquartile range (showing the range of half the students for each group); the whiskers extent to one-and-a-half times the interquartile range; zeros are outliers that are beyond the whiskers. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
+
+\includegraphics[width=\maxwidth]{figure/boxplot1} \caption[Comparison of total and clearing grades]{Comparison of total and clearing grades\label{fig:boxplot1}}
+\end{figure}
+
+
+\end{knitrout}
+
+\subsection*{Entry grades and performance}
+It is difficult to analyse the relatioknship between entry grades and student performance.  Students have been categorised into three levels of qualitifcation:  A levels that are close to the ABB course entry requirement; Other A-levels with grades below AAB; and, non-A-level, primarily BETC qualifications.  The categorisation is a little imprecise.  However, unsurprisingly, there is a strong correlation between the entry grades and the end of year result.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[]
+
+\includegraphics[width=\maxwidth]{figure/boxplot2} \caption[Entry grades and student performance]{Entry grades and student performance\label{fig:boxplot2}}
+\end{figure}
+
+
+\end{knitrout}
+
+
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Jul 20 18:47:14 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -145,7 +168,16 @@ da\$AlevelABB or close & 62.32 & 8.90 & 7.00 & 0.00 \\
    \hline
 \end{tabular}
 \caption{Level 4 grade for A-level category} 
-\label{Eqref:1}
 \end{table}
+
+
+\subsection*{The performance of overseas students}
+These are the students with an \emph{overseas} funding category.  The boxplot, constrfcuted in the same way as outlined above, shows that the average overall level four mark for overseas students is 35.65 percent compared to 50.67 percent for the whole cohort.  
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/boxplot3} 
+
+\end{knitrout}
 
 \end{document}
