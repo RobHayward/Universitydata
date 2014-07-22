@@ -34,7 +34,10 @@ str(da)
 da$Outcome
 boxplot(subset(da$Mark, da$Clearing == 1))
 boxplot(da$Mark)
-
+da$Alevel <- factor(da$Alevel)
+levels(da$Alevel) <- c("ABB or close", "Lower A-Level", "BTEC and other")
+boxplot(formula = da$ML150T ~ da$Alevel, 
+        main = "Grade distribution and entry grades")
 
 # Rename all levels, by name
 x <- factor(c("alpha","beta","gamma","alpha","beta"))
