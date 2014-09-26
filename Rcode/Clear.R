@@ -1,5 +1,5 @@
 da <- read.csv("Data/FI1.csv", stringsAsFactors = FALSE)
-head(da)
+da$Outcome <- factor(da$Outcome)
 str(da)
 par(mfrow = c(1,2))
 daclear <- subset(da, da$Clear == 1)
