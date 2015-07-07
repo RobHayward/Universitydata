@@ -29,5 +29,76 @@
 <<loadata, message=FALSE, echo=FALSE>>=
 da <- read.csv("../Data/FI1.csv", stringsAsFactors = FALSE)
 @
-The total number of students was \Sexpr{length(da$Mark)}.  
+
+The total number of students was \Sexpr{length(da$Mark)}.  The outcomes recorded by the summer Exam Board are in Table \ref{tabref:out}.  
+
+<<outcometable, message=FALSE, echo=FALSE, results='asis'>>=
+require(xtable)
+da$Outcome <- factor(da$Outcome)
+# da$Outcomeprop <- as.numeric(levels(da$Outcome))[da$Outcome]
+nicetable <- xtable(table(da$Outcome, dnn = "Number of Students"), caption = "Outcome of Level 4 BSc. Finance and Investsment Students", label = "tabref:out")
+nicetable
+@
+The figures show that \Sexpr{round(table(da$Outcome)[1]/length(da$Outcome)*100, digits = 2)} percent of the students failed and were asked to withdraw;  \Sexpr{round(table(da$Outcome)[2]/length(da$Outcome)*100, digits = 2)} percent passed at the first attempt; \Sexpr{round(table(da$Outcome)[3]/length(da$Outcome)*100, digits = 2)} were referred and \Sexpr{round(table(da$Outcome)[4]/length(da$Outcome)*100, digits = 2)} withdrew before taking exams.  
+
+There are four issues to consider in detail: the first is the proportion of students who do not complete the first year; the second is the performance of students taken onto the course through clearing; the third is the relationship between student entry grades and the level four performance; the final issue is that of the performance of overseas students. 
+
+\subsection*{Proportion of students completing level 4}
+Though the University counts \emph{fail-withdraw} and \emph{withdraw} as the same, it is clear from an investigation of the student files that these are two distinct categories.  The second group includes those who switched to another course and those leaving the course for non-academic reasons. 
+
+For example, Eleanor Alabaster withdrew for``family and personal reasons'';  Erikas Gringaliunas withdrew because for financial difficulties, he was an overseas student from Lithuania, had no financial support and found it too expensive in Brighton; Laura Battle withdrew because she found it difficult to keep up with the mathematical elements of Economics and had not settled in Brighton; Jack Bridges transferred out to Sport and Exercise Science; Craig O'Neill withdrew as a result of his poor health and his disability; Samuel Peka transferred to Computer Science. 
+
+\subsection*{Performance of clearing students}
+There were \Sexpr{sum(da$Clear == 1)} students taken  onto the course through clearing.  It is evident from the box-plot in Figure \ref{fig:boxplot1} and from Table \ref{tabref:out2} that these were relatively strong students.   
+
+<<boxplot1, echo=FALSE, fig.height=4.5, fig.width=3.5, fig.cap="Comparison of total and clearing grades", fig.pos="!h">>=
+daclear <- subset(da, da$Clear == 1)
+par(las = 2)
+boxplot(da$Mark, daclear$Mark, names = c("Full Group", "Clearing"), main = "Distribution of Student Grades")
+@
+The box-plot shows the distribution of grades; the solid black line is the median grade for all students and for clearing students respectively; the box gives the interquartile range (showing the range of half the students for each group); the whiskers extent to one-and-a-half times the interquartile range; zeros are outliers that are beyond the whiskers. 
+
+<<outcometable2, message=FALSE, echo=FALSE, results='asis'>>=
+require(xtable)
+da$Outcome <- factor(da$Outcome)
+daclear <- subset(da, da$Clear == 1)
+daover <- subset(da, da$Fee.status == "O")
+# da$Outcomeprop <- as.numeric(levels(da$Outcome))[da$Outcome]
+nicetable2 <- xtable(table(daclear$Outcome, dnn = "Number of Students"), caption = "Outcome of Level 4 BSc. Finance and Investsment Students joined through clearing", label = "tabref:out2")
+nicetable2
+@
+
+\subsection*{Entry grades and performance}
+<<boxplot2, echo=FALSE, fig.height=4.5, fig.width=3.5, fig.cap="Entry grades and student performance", fig.pos="!h">>=
+da$Alevel <- factor(da$Alevel)
+levels(da$Alevel) <- c("ABB or close", "Lower A-Level", "BTEC and other")
+par(las = 2)
+boxplot(formula = da$Mark ~ da$Alevel, main = "Grade distribution and entry grades")
+@
+
+It is difficult to analyse the relationship between entry grades and student performance.  Students have been categorised into three levels of qualification:  A levels that are close to the ABB course entry requirement; Other A-levels with grades below ABB; and, none-A-level qualifications, these are primarily BETC.  The categorisation is a little imprecise.  However, unsurprisingly, there is a strong correlation between the entry grades and the end of year result.
+
+It is possible to do some more detailed analysis of where the students with lower grades are falling down. They do particularly badly relative to the overall average in Economics EC161, Finance FN162 and Financial Skills FN142.   The difference between the students arriving with lower level qualifications and the average is less pronounced Financial Accounting FA183 and Personal and Academic Skills ML150. 
+%<<reg, echo=FALSE, results='asis'>>=
+%nicetable3 <- xtable(lm(da$Mark ~ da$Alevel -1), caption = "Level 4 grade %relative to A-level category", digits = 2)
+%nicetable3
+%@
+
+\subsection*{The performance of overseas students}
+<<boxplot3, echo=FALSE, fig.height=4.5, fig.width=3.5, fig.lp="figref:box2">>=
+daover <- subset(da, da$Fee.status == "O")
+par(las = 2)
+boxplot(da$Mark, daover$Mark, names = c("Full Group", "Overseas"), main = "Grade Distribution of Student Grades")
+@
+
+Overseas students have to overcome cultural and language barriers in addition to the issues faced by other students.  The students are identified by their \emph{overseas} funding category.  The box-plot, constructed in the same way as outlined above, shows that the average overall level four mark for overseas students is \Sexpr{round(mean(daover$Mark, na.rm = TRUE), digits = 2)} percent compared to \Sexpr{round(mean(da$Mark, na.rm = TRUE), digits = 2)} percent for the whole cohort.  
+
+\subsection*{Conclusions}
+\begin{itemize}
+\item Taking students through clearing does not appear to be a problem
+\item Students arriving with lower level qualifications tend to have the greatest difficulties.  However, this is less pronounced in Financial Accounting and Professional skills.  Can we draw some \emph{good practice} from these modules?
+\item Overseas have greater difficulties than average.  This reinforces the suggestion put forward by Tracey Taylor that these students require additional support. 
+\end{itemize}
+
+
 \end{document}
